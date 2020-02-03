@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="LocalWeatherApp.Views.WeatherDetailPage"
+             xmlns:viewModels="clr-namespace:LocalWeatherApp.ViewModels.Weather"
+             xmlns:models="clr-namespace:LocalWeatherApp.Services.WeatherService.Models"
+             Title="{Binding Title}" Visual="Material">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="High">#C845AC</Color>
+            <Color x:Key="Low">#2796CD</Color>
+            <Color x:Key="LightTextColor">#999999</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout Spacing="30" Padding="30" x:DataType="viewModels:WeatherDetailViewModel">
+        <Label Text="Today" 
+               FontSize="Large" 
+               HorizontalTextAlignment="Center" 
+               TextColor="{StaticResource LightTextColor}"/>
+        <FlexLayout Direction="Row" 
+                    JustifyContent="SpaceAround"
+                    AlignItems="Center">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="low " 
+                           FontSize="Medium" 
+                           TextColor="{StaticResource Low}" />
+                    <Label Text="{Binding WeatherToday.MinTemp, StringFormat='{0:F2}°C'}" 
+                           FontSize="Medium" 
+                           TextColor="{StaticResource LightTextColor}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="high " 
+                           FontSize="Medium" 
+                           TextColor="{StaticResource High}" />
+                    <Label Text="{Binding WeatherToday.MaxTemp, StringFormat='{0:F2}°C'}" 
+                           FontSize="Medium" 
+                           TextColor="{StaticResource LightTextColor}"/>
+                </StackLayout>
+            </StackLayout>
+            <Image x:Name="WeatherStateTodayImage" 
+                   Source="{Binding WeatherTodayStateURL}"
+                   WidthRequest="100"
+                   HeightRequest="100"/>
+        </FlexLayout>
+
+        <Label Text="Tomorrow" 
+               FontSize="Large" 
+               HorizontalTextAlignment="Center" 
+               TextColor="{StaticResource LightTextColor}"/>
+        <FlexLayout Direction="Row" 
+                    JustifyContent="SpaceAround" 
+                    AlignItems="Center">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="low " 
+                           FontSize="Medium" 
+                           TextColor="{StaticResource Low}"/>
+                    <Label Text="{Binding WeatherTomorrow.MinTemp, StringFormat='{0:F2}°C'}" 
+                           FontSize="Medium" 
+                           TextColor="{StaticResource LightTextColor}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="high " 
+                           FontSize="Medium" 
+                           TextColor="{StaticResource High}"/>
+                    <Label Text="{Binding WeatherTomorrow.MaxTemp, StringFormat='{0:F2}°C'}" 
+                           FontSize="Medium" 
+                           TextColor="{StaticResource LightTextColor}"/>
+                </StackLayout>
+            </StackLayout>
+            <Image x:Name="WeatherStateTomorrowImage" 
+                   Source="{Binding WeatherTomorrowStateURL}"
+                   WidthRequest="100"
+                   HeightRequest="100"
+                   />
+        </FlexLayout>
+    </StackLayout>
+    
+</ContentPage>
