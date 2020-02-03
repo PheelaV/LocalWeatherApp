@@ -30,12 +30,11 @@ namespace LocalWeatherApp.Views
 
         async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            //var weatherLocation = (WeatherLocation) sender;
             var item = args.SelectedItem as WeatherLocation;
-            if (!(item != null))
+            if (item == null)
                 return;
             var model = App.ServiceProvider.GetService<WeatherDetailViewModel>().CheckForNull();
-            // scetchy, maybe pass only dto?
+
             model.LoadItemsCommand.Execute(item.Woeid);
 
             await this.Navigation.PushAsync(new WeatherDetailPage(model));
@@ -48,12 +47,5 @@ namespace LocalWeatherApp.Views
         {
             this.viewModel.LoadItemsCommand.Execute(null);
         }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-        }
-
-
     }
 }

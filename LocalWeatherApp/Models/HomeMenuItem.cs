@@ -2,7 +2,6 @@
 {
     public enum MenuItemType
     {
-        Browse,
         Weather,
         About
     }

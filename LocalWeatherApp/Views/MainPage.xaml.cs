@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using LocalWeatherApp.Helpers;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,12 +17,12 @@ namespace LocalWeatherApp.Views
         Dictionary<int, NavigationPage> MenuPages = new Dictionary<int, NavigationPage>();
         public MainPage()
         {
-            this.MenuPages.Add((int)MenuItemType.About, (NavigationPage)this.Detail);
+
             this.InitializeComponent();
             
             this.MasterBehavior = MasterBehavior.Popover;
             this.Detail = new NavigationPage(App.ServiceProvider.GetService<WeatherPage>());
-
+            this.MenuPages.Add((int)MenuItemType.Weather, (NavigationPage)this.Detail);
         }
 
         public async Task NavigateFromMenu(int id)
@@ -31,10 +32,10 @@ namespace LocalWeatherApp.Views
                 switch (id)
                 {
                     case (int)MenuItemType.Weather:
-                        this.MenuPages.Add(id, new NavigationPage(App.ServiceProvider.GetService<WeatherPage>()));
+                        this.MenuPages.Add(id, new NavigationPage(App.ServiceProvider.GetService<WeatherPage>().CheckForNull()));
                         break;
                     case (int)MenuItemType.About:
-                        this.MenuPages.Add(id, new NavigationPage(App.ServiceProvider.GetService<AboutPage>()));
+                        this.MenuPages.Add(id, new NavigationPage(App.ServiceProvider.GetService<AboutPage>().CheckForNull()));
                         break;
                 }
             }
